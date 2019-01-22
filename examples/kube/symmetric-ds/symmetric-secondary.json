@@ -1,0 +1,70 @@
+{
+        "kind": "Service",
+        "apiVersion": "v1",
+	"metadata": {
+		"name":"secondary-ds"
+	},
+        "spec": {
+            "ports": [{
+                "protocol": "TCP",
+                "port": 31416,
+                "targetPort": 31415,
+		"nodePort": 30001
+            }],
+            "selector": {
+                "name": "secondary-ds"
+            },
+            "type": "NodePort",
+            "sessionAffinity": "None"
+        }
+}
+
+{
+    "kind": "Pod",
+    "apiVersion": "v1",
+    "metadata": {
+        "name": "secondary-ds",
+        "namespace": "demo",
+        "labels": {
+            "name": "secondary-ds"
+        }
+    },
+    "spec": {
+        "containers": [
+            {
+                "name": "symmetric-ds",
+                "image": "jumpmind/symmetricds:latest",
+                "ports": [
+                    {
+                        "containerPort": 31415,
+                        "protocol": "TCP"
+                    }
+                ],
+   		"volumeMounts": [
+                    {
+                        "mountPath": "/opt/symmetric-ds/engines",
+                        "name": "engines2",
+                        "readOnly": false
+                    },
+                    {
+                        "mountPath": "/opt/symmetric-ds/logs",
+                        "name": "logs",
+                        "readOnly": false
+                    }
+                ]
+            }
+        ],
+    	"volumes": [
+            {
+                "name": "engines2",
+                "persistentVolumeClaim": {
+                    "claimName": "symmetric-secondary-engines"
+                }
+            },
+            {
+                "name": "logs",
+                "emptyDir": {}
+            }
+        ]
+    }
+}

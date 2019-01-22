@@ -1,0 +1,44 @@
+{
+    "kind": "PersistentVolumeClaim",
+    "apiVersion": "v1",
+    "metadata": {
+      "name": "symmetric-engines"
+    },
+    "spec": {
+      "selector": {
+        "matchLabels": {
+          "name": "$CCP_NAMESPACE-symmetric-ds"
+        }
+      },
+      "accessModes": [
+        "$CCP_STORAGE_MODE"
+      ],
+      "resources": {
+        "requests": {
+          "storage": "50M"
+        }
+      }
+    }
+}
+{
+    "kind": "PersistentVolumeClaim",
+    "apiVersion": "v1",
+    "metadata": {
+      "name": "symmetric-secondary-engines"
+    },
+    "spec": {
+      "selector": {
+        "matchLabels": {
+          "name": "$CCP_NAMESPACE-symmetric-secondary-ds"
+        }
+      },
+      "accessModes": [
+        "$CCP_STORAGE_MODE"
+      ],
+      "resources": {
+        "requests": {
+          "storage": "50M"
+        }
+      }
+    }
+}
