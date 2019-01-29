@@ -32,8 +32,9 @@
     "spec": {
         "containers": [
             {
-                "name": "symmetric-ds",
-                "image": "jumpmind/symmetricds:latest",
+                "name": "symmetric-primary",
+	        "imagePullPolicy":"Never",
+                "image": "crunchy_symmetric:latest",
                 "ports": [
                     {
                         "containerPort": 31415,
