@@ -2,12 +2,12 @@
     "kind": "PersistentVolumeClaim",
     "apiVersion": "v1",
     "metadata": {
-      "name": "symmetric-engines"
+      "name": "symmetric-secondary-engines"
     },
     "spec": {
       "selector": {
         "matchLabels": {
-          "name": "$CCP_NAMESPACE-symmetric-ds"
+          "name": "$CCP_NAMESPACE-symmetric-secondary-ds"
         }
       },
       "accessModes": [

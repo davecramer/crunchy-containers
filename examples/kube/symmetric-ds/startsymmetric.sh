@@ -19,6 +19,8 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 #${DIR}/cleanupsymmetric.sh
 
 create_storage "symmetric" "${CCP_NAMESPACE?}"
+create_storage "symmetric-secondary" "${CCP_NAMESPACE?}"
+
 if [[ $? -ne 0 ]]
 then
     echo_err "Failed to create storage, exiting.."
